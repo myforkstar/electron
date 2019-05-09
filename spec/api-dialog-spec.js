@@ -1,8 +1,19 @@
 const { expect } = require('chai')
-const { dialog } = require('electron').remote
+const { BrowserWindow, dialog } = require('electron').remote
 
 describe('dialog module', () => {
   describe('showOpenDialog', () => {
+    it('should not throw for valid cases', () => {
+      expect(() => {
+        dialog.showOpenDialog({ title: 'i am title' })
+      }).to.not.throw()
+
+      expect(() => {
+        const bw = new BrowserWindow()
+        dialog.showOpenDialog(bw, { title: 'i am title' })
+      }).to.not.throw()
+    })
+
     it('throws errors when the options are invalid', () => {
       expect(() => {
         dialog.showOpenDialog({ properties: false })
@@ -27,6 +38,17 @@ describe('dialog module', () => {
   })
 
   describe('showSaveDialog', () => {
+    it('should not throw for valid cases', () => {
+      expect(() => {
+        dialog.showSaveDialog({ title: 'i am title' })
+      }).to.not.throw()
+
+      expect(() => {
+        const bw = new BrowserWindow()
+        dialog.showSaveDialog(bw, { title: 'i am title' })
+      }).to.not.throw()
+    })
+
     it('throws errors when the options are invalid', () => {
       expect(() => {
         dialog.showSaveDialog({ title: 300 })
@@ -51,6 +73,17 @@ describe('dialog module', () => {
   })
 
   describe('showMessageBox', () => {
+    it('should not throw for valid cases', () => {
+      expect(() => {
+        dialog.showMessageBox({ title: 'i am title' })
+      }).to.not.throw()
+
+      expect(() => {
+        const bw = new BrowserWindow()
+        dialog.showMessageBox(bw, { title: 'i am title' })
+      }).to.not.throw()
+    })
+
     it('throws errors when the options are invalid', () => {
       expect(() => {
         dialog.showMessageBox(undefined, { type: 'not-a-valid-type' })
